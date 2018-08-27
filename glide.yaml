@@ -1,0 +1,12 @@
+package: github.com/ciazhar/util
+import:
+- package: github.com/gorilla/mux
+  version: v1.6.2
+- package: golang.org/x/text
+  version: v0.3.0
+  subpackages:
+  - transform
+  - unicode/norm
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
