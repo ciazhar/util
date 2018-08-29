@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 	"strconv"
+	"github.com/ciazhar/db"
 )
 
 func ValidateObjectId(s string) error {
@@ -85,4 +86,20 @@ func RequestPagingAndSorting(r *http.Request) (int,int,string,error) {
 		sort="createdAt"
 	}
 	return skip,limit,sort,nil
+}
+
+func IsIdExists(id bson.ObjectId, collection string) bool {
+	if count,_ := db.Mongo.C(collection).FindId(id).Limit(1).Count();count!=1{
+		return false
+	}
+	return true
+}
+
+func IsArrayIdExists(ids []bson.ObjectId, collection string) bool {
+	for _,id := range ids {
+		if count,_ := db.Mongo.C(collection).FindId(id).Limit(1).Count();count!=1{
+			return false
+		}
+	}
+	return true
 }
