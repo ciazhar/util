@@ -5,6 +5,6 @@ import (
 	"github.com/magiconair/properties/assert"
 )
 
-func IsEqual(t *testing.T, want, field string ,got interface{})  {
-	assert.Equal(t,got,want,"Expected "+ field +" to be '"+want+"'. Got "+got.(string))
+func IsEqual(t *testing.T, got map[string]interface{}, field, want string)  {
+	assert.Equal(t,got[field],want,"Expected "+ field +" to be '"+want+"'. Got "+got[field].(string))
 }
