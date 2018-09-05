@@ -51,10 +51,10 @@ func RequestQueryInteger(r *http.Request, name string, q map[string]interface{})
 
 func RequestQueryBoolean(r *http.Request, name string, q map[string]interface{}) {
 	value := r.URL.Query().Get(name)
-	if value=="false" {
-		q[name]=false
-	}else {
+	if value=="true" {
 		q[name]=true
+	}else {
+		q[name]=false
 	}
 }
 
