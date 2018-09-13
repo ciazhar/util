@@ -5,6 +5,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+type ok interface {
+	Validate() error
+}
+
 type ErrMissingField string
 type ErrNotFound string
 type ErrAlreadyExist string
