@@ -3,6 +3,7 @@ package util
 import (
 	"github.com/ciazhar/db"
 	"gopkg.in/mgo.v2/bson"
+	"errors"
 )
 
 type ok interface {
@@ -26,6 +27,9 @@ func (e ErrAlreadyExist) Error() string {
 }
 
 func IsValueAlreadyExists(collection string, variable string, value interface{}) error {
+	if value=="" {
+		return errors.New(variable+" empty")
+	}
 	count,_ := db.Mongo.C(collection).Find(bson.M{variable:value}).Count()
 	if count>=1{
 		return ErrAlreadyExist(collection)
@@ -34,6 +38,9 @@ func IsValueAlreadyExists(collection string, variable string, value interface{})
 }
 
 func IsValueNotFound(collection string, variable string, value interface{}) error {
+	if value=="" {
+		return errors.New(variable+" empty")
+	}
 	count,_ := db.Mongo.C(collection).Find(bson.M{variable:value}).Count()
 	if count==0{
 		return ErrNotFound(collection)
