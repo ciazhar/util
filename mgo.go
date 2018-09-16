@@ -7,7 +7,6 @@ import (
 	"strings"
 	"strconv"
 	"github.com/ciazhar/db"
-	"github.com/ciazhar/account-service/util"
 )
 
 func ValidateObjectId(s string) error {
@@ -63,7 +62,7 @@ func RequestPagingAndSorting(r *http.Request) (int,int,string,error) {
 	//Paging
 	skip := RequestParamInt(r,"skip")
 	limit := RequestParamInt(r,"limit")
-	paginate := util.RequestParamString(r,"paginate")
+	paginate := RequestParamString(r,"paginate")
 	if paginate=="false" {
 		skip = 0
 		limit = 0
