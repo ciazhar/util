@@ -19,6 +19,7 @@ func ValidateObjectId(s string) error {
 func RequestQueryString(r *http.Request, name string, q map[string]interface{}) {
 	value := r.URL.Query().Get(name)
 	if value!="" {
+		value := bson.M{"$regex":bson.RegEx{Pattern:value}}
 		q[name]=value
 	}
 }
