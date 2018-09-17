@@ -39,7 +39,7 @@ func IsValueAlreadyExists(collection string, variable string, value interface{})
 
 func IsValueNotFound(collection string, variable string, value interface{}) error {
 	if value=="" {
-		return errors.New(variable+" empty")
+		return nil
 	}
 	count,_ := db.Mongo.C(collection).Find(bson.M{variable:value}).Count()
 	if count==0{
