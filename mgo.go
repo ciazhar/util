@@ -109,3 +109,7 @@ func IsArrayIdExists(ids []bson.ObjectId, collection string) bool {
 	}
 	return true
 }
+
+func SetActive(q map[string]interface{}) {
+	q["active"]=true
+}
