@@ -59,6 +59,19 @@ func RequestQueryBoolean(r *http.Request, name string, q map[string]interface{})
 	}
 }
 
+func RequestQueryOr(r *http.Request, paramName string, queryParams []string , q map[string]interface{}) {
+	value := r.URL.Query().Get(paramName)
+	if value!="" {
+		var query []bson.M
+
+		v :=  bson.M{"$regex":bson.RegEx{Pattern:value,Options:"i"}}
+		for i := range queryParams {
+			query = append(query, bson.M{queryParams[i]:v})
+		}
+		q["$or"]=query
+	}
+}
+
 func RequestPagingAndSorting(r *http.Request) (int,int,string,error) {
 	//Paging
 	skip := RequestParamInt(r,"skip")
