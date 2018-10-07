@@ -54,7 +54,7 @@ func RequestQueryBoolean(r *http.Request, name string, q map[string]interface{})
 	value := r.URL.Query().Get(name)
 	if value=="true" {
 		q[name]=true
-	}else {
+	}else if value=="false" {
 		q[name]=false
 	}
 }
