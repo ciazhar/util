@@ -5,6 +5,11 @@ import (
 	"encoding/json"
 )
 
+type ResponseData struct {
+	Message string `json:"message"`
+	Data interface{} `json:"data"`
+}
+
 func RespondWithError(w http.ResponseWriter, code int, msg string) {
 	RespondWithJson(w, code, map[string]string{"error": msg})
 }
