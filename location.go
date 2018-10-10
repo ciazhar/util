@@ -3,8 +3,8 @@ package util
 type GeoJson struct {
 	Lat			float64	`json:"lat,omitempty" bson:"-"`
 	Long		float64	`json:"lng,omitempty" bson:"-"`
-	X 			float64 `json:"x"`
-	Y 			float64 `json:"y"`
+	X 			float64 `json:"x" bson:"-"`
+	Y 			float64 `json:"y" bson:"-"`
 	Type        string    `json:"-"`
 	Coordinates []float64 `json:"coordinates"`
 }
