@@ -25,7 +25,10 @@ func Json(w http.ResponseWriter, code int, message string ,data interface{}) {
 	w.Write(response)
 }
 
-func RespondWithJson(w http.ResponseWriter, code int, payload interface{}) {
+func RespondWithJson(w http.ResponseWriter, code int, data interface{}) {
+	payload := ResponseData{
+		Data:data,
+	}
 	response, _ := json.Marshal(payload)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
