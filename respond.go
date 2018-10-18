@@ -10,11 +10,8 @@ type ResponseData struct {
 	Data interface{} `json:"data"`
 }
 
-func RespondWithError(w http.ResponseWriter, code int, msg string) {
-	response, _ := json.Marshal(map[string]string{"error": msg})
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
-	w.Write(response)
+func RespondWithError(w http.ResponseWriter, code int, data interface{}) {
+	RespondWithJson(w, code, data)
 }
 
 func Json(w http.ResponseWriter, code int, message string ,data interface{}) {
@@ -28,7 +25,7 @@ func Json(w http.ResponseWriter, code int, message string ,data interface{}) {
 	w.Write(response)
 }
 
-func RespondWithJson(w http.ResponseWriter, code int, data interface{}) {
+func RespondWithJson(w http.ResponseWriter, code int,data interface{}) {
 	payload := ResponseData{
 		Data:data,
 	}
