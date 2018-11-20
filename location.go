@@ -13,4 +13,5 @@ type Area struct {
 	Distance  int `json:"distance"`
 	Latitude  float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
+	Limit	  int `json:"limit"`
 }
