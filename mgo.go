@@ -76,21 +76,24 @@ func RequestQueryOr(r *http.Request, paramName string, queryParams []string , q 
 func RequestQueryDateDistance(r *http.Request, from string, until string, q map[string]interface{}) error {
 	fromString := r.URL.Query().Get(from)
 	untilString := r.URL.Query().Get(until)
-	
-	fromDate,err := StringToDate(fromString)
-	if err!=nil {
-		return err
+
+	if fromString!=""&&untilString!="" {
+		fromDate,err := StringToDate(fromString)
+		if err!=nil {
+			return err
+		}
+
+		untilDate,err := StringToDate(untilString)
+		if err!=nil {
+			return err
+		}
+
+		q["createdAt"] = bson.M{
+			"$gt": fromDate,
+			"$lt": now.New(untilDate).EndOfDay(),
+		}
 	}
-	
-	untilDate,err := StringToDate(untilString)
-	if err!=nil {
-		return err
-	}
-	
-	q["createdAt"] = bson.M{
-		"$gt": fromDate,
-		"$lt": now.New(untilDate).EndOfDay(),
-	}
+
 	return nil
 }
 
